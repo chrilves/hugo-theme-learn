@@ -4,7 +4,14 @@
 </span>
 
 {{if .Site.Home.Content }} 
-{{.Site.Home.Content}}	
+{{.Site.Home.Content}}
+<!-- Note that .Pages is the same as .Site.RegularPages on the homepage template. -->
+{{ range .Sections }}
+	<h1>{{ .Title }}</h1>
+	{{ range .Pages }}
+			{{ .Render "summary"}}
+	{{ end }}	
+{{ end }}
 {{else}}           
 	{{if eq .Site.Language.Lang "fr"}}
 		<h1>Personaliser la page d'accueil</h1>
