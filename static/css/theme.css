@@ -1134,3 +1134,6 @@ pre .copy-to-clipboard:hover {
 option {
     color: initial;
 }
+#body-inner p {
+    text-align: justify;
+}
