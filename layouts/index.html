@@ -5,13 +5,34 @@
 
 {{if .Site.Home.Content }} 
 {{.Site.Home.Content}}
+
+{{/* TYPES */}}
+{{ range where .Sections ".Params.section" "=" "types" }}
+	
+	<h2><a class="hightlight" href={{ .Permalink }}>{{ .Title }}</a></h1>
+	{{ .TableOfContents }}
+	{{ .Content }}	
+	<ul>
+			{{ range .Pages.ByParam "episode" }}
+				<li><a class="hightlight" href='{{ .Permalink }}'>{{ .Title }}</a></li>
+			{{ end }}
+	</ul>
+{{ end }}
+
+
 <!-- Note that .Pages is the same as .Site.RegularPages on the homepage template. -->
-{{ range .Sections }}
-	<h1>{{ .Title }}</h1>
+
+{{/* POSTS */}}
+{{ range where .Sections ".Params.section" "=" "posts" }}
+	
+	<h1><a class="hightlight" href={{ .Permalink }}>{{ .Title }}</a></h1>
+	{{ .TableOfContents }}	
 	{{ range .Pages }}
 			{{ .Render "summary"}}
 	{{ end }}	
+
 {{ end }}
+
 {{else}}           
 	{{if eq .Site.Language.Lang "fr"}}
 		<h1>Personaliser la page d'accueil</h1>
